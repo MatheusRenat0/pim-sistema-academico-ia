@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>TestPim</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Acadêmico</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao Sistema Acadêmico</h1>
-    </header>
 
-    <main>
-        <h2>Olá, Sentimos sua falta.</h2>
-        <br><br>
-        <p>Selecione abaixo o perfil que deseja acessar:</p>
+    <div class="left">
+        <h2>Você sabe o que é o SIGMA?</h2>
+        <p>
+            O SIGMA nasceu nasceu para transformar a experiência educacional, conectando alunos, pais e responsáveis com recursos que simplificam e enriquecem o processo de aprendizagem. </p>
 
-         <ul>
-            <li><a href="{{ url_for('login_aluno_page') }}">🧑🏼‍🎓 Sou Aluno</a></li>
-            <li><a href="{{ url_for('login_professor_page') }}">👨🏾‍🏫 Sou Professor</a></li>
-            <li><a href="{{ url_for('login_diretor_page') }}">👨🏻‍💼 Coordenação </a></li>
-        </ul>
-    </main>
+        <br>
+
+        <p><strong>Benefícios para os estudantes:</strong><br>
+             <strong>Acesso centralizado:</strong> boletins, frequência, tarefas e agenda escolar em um só lugar.<br>
+             <strong>Recursos otimizados:</strong> integração com plataformas da SED para facilitar o aprendizado.</p>
+
+        <br>
+
+        <p>O PIM é mais do que um aplicativo,é uma ponte entre a escola e a comunidade escolar.</p>
+    </div>
+
+    <div class="right">
     
+        <h1 class="welcome">Bem-vindo ao SIGMA- Sistema Integrado de Gestão e Monitoramento Acadêmico</h1>
+
+        <div class="login-container">
+            <h3>Olá, sentimos sua falta.</h3>
+            <p>Selecione abaixo o perfil que deseja acessar:</p>
+
+            <ul>
+                <li><a href="{{ url_for('login_aluno_page') }} "><span>👨‍🎓 Sou Aluno</span></a></li>
+                <li><a href="{{ url_for('login_professor_page') }} "><span>👨‍🏫 Sou Professor</span></a></li>
+                <li><a href="{{ url_for('login_diretor_page') }}"><span>🏫 Coordenação</span></a></li>
+            </ul>
+
+            <div class="footer">
+                <a href="#">Preciso de ajuda</a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

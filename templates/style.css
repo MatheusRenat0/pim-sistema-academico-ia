@@ -1,0 +1,149 @@
+/* ================================
+   Importação de Fonte + Reset
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;                /* Remove margens padrão do navegador */
+    padding: 0;               /* Remove espaçamentos internos padrão */
+    box-sizing: border-box;   /* Inclui bordas e padding no cálculo do tamanho total */
+    font-family: 'Poppins', sans-serif;  /* Fonte moderna e legível */
+}
+
+/* ================================
+   Estrutura geral da página
+================================ */
+body {
+    display: flex;                     /* Divide a tela em dois blocos (esquerda/azul e direita/branca) */
+    height: 100vh;                     /* Ocupa toda a altura da janela */
+}
+
+/* ================================
+   Lado esquerdo (azul)
+================================ */
+.left {
+    flex: 1;                           /* Ocupa metade da tela */
+    background: linear-gradient(160deg, #0077c8, #00a0e3); /* Degradê azul bonito */
+    color: white;                      /* Texto branco sobre o fundo azul */
+    padding: 60px 80px;                /* Espaçamento interno grande */
+    display: flex;                     /* Permite alinhar o conteúdo verticalmente */
+    flex-direction: column;            /* Coloca o texto em coluna */
+    justify-content: center;           /* Centraliza verticalmente */
+    line-height: 1.6;                  /* Espaçamento entre linhas agradável */
+}
+
+.left h2 {
+    font-size: 2rem;                   /* Título grande */
+    font-weight: 600;                  /* Negrito médio */
+    margin-bottom: 20px;               /* Espaço abaixo do título */
+}
+
+.left p {
+    font-size: 1rem;                   /* Tamanho padrão do texto */
+    margin-bottom: 10px;               /* Pequeno espaçamento entre parágrafos */
+}
+
+/* ================================
+   Lado direito (branco)
+================================ */
+.right {
+    flex: 1;                           /* Ocupa metade da tela */
+    background-color: #f8faff;         /* Fundo branco azulado suave */
+    position: relative;                /* Permite posicionar o texto e o login */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;         /* Mantém o login mais embaixo */
+    align-items: center;               /* Centraliza horizontalmente */
+    padding: 60px 40px;                /* Espaçamento interno */
+}
+
+/* ================================
+   Título central entre azul e branco
+================================ */
+.welcome {
+    position: absolute;                /* Posiciona o título livremente */
+    top: 35%;           /* Centraliza verticalmente */
+    left: 48%;   /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%);  /* Ajusta para o centro exato */
+    font-size: 1.8rem;
+    color: #333;                       /* Cor escura sobre fundo claro */
+    text-align: center;
+    width: 100%;
+}
+
+/* ================================
+   Container do login
+================================ */
+.login-container {
+    width: 100%;                       /* Ocupa toda a largura disponível */
+    max-width: 350px;                  /* Limita a largura para centralizar bem */
+    background: transparent;           /* Fundo transparente (fica sobre o branco) */
+    text-align: left;
+    margin-bottom: 60px;               /* Afasta do rodapé */
+}
+
+.login-container h3 {
+  
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-container p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* ================================
+   Lista de perfis (botões)
+================================ */
+ul {
+    list-style: none;                  /* Remove marcadores de lista */
+    display: flex;
+    flex-direction: column;            /* Um abaixo do outro */
+    gap: 15px;                         /* Espaçamento entre os botões */
+}
+
+ul li a {
+    display: flex;
+    justify-content: space-between;    /* Ícone à esquerda e seta à direita */
+    align-items: center;
+    background: #fff;                  /* Fundo branco */
+    padding: 15px 20px;
+    border-radius: 15px;               /* Bordas arredondadas */
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    box-shadow: 0 3px 8px rgba(0, 162, 255, 0.08);  /* Sombrinha leve */
+    transition: all 0.3s ease;         /* Suaviza o hover */
+}
+
+ul li a:hover {
+    transform: translateY(-3px);       /* Sobe levemente no hover */
+    box-shadow: 0 6px 12px rgba(0, 183, 255, 0.12);
+}
+
+/* Adiciona a seta ➜ no fim dos botões */
+ul li a::after {
+    content: "➜";
+    font-size: 1.2rem;
+    color: #0077c8;
+}
+
+/* ================================
+   Rodapé (link de ajuda)
+================================ */
+.footer {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer a {
+    color: #0077c8;                    /* Azul padrão do tema */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+

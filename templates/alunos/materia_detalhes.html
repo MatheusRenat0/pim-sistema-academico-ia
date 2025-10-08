@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes de {{ materia.nome }}</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>{{ materia.nome }}</h1>
+    <a href="{{ url_for('dashboard_aluno') }}">Voltar para o Dashboard</a>
+
+    <h2>Atividades e Notas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Data de Entrega</th>
+                <th>Status</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for atividade in atividades %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('responder_atividade', atividade_id=atividade.id) }}">
+                        {{ atividade.titulo }}
+                    </a>
+                </td>
+                <td>{{ atividade.data_entrega.strftime('%d/%m/%Y') }}</td>
+                {% if atividade.id in notas_entregas %}
+                    <td>Entregue</td>
+                    <td>{{ notas_entregas[atividade.id] if notas_entregas[atividade.id] is not none else 'Aguardando correção' }}</td>
+                {% else %}
+                    <td>Pendente</td>
+                    <td>-</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Frequência</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in presencas %}
+            <tr>
+                <td>{{ p.data.strftime('%d/%m/%Y') }}</td>
+                <td>{{ 'Presente' if p.presente else 'Falta' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

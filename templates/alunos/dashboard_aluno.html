@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Aluno</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        ul { list-style: none; padding: 0; }
+        li a { display: block; background-color: #f0f0f0; margin: 5px 0; padding: 15px; text-decoration: none; color: #333; border-radius: 5px; }
+        li a:hover { background-color: #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Olá, {{ aluno.nome }}!</h1>
+    <p>Selecione uma matéria para ver os detalhes.</p>
+    <a href="{{ url_for('logout') }}">Sair</a>
+
+    <h2>Minhas Matérias</h2>
+    {% if materias %}
+        <ul>
+            {% for materia in materias %}
+                <li>
+                    <a href="{{ url_for('materia_detalhes', materia_id=materia.id) }}">
+                        {{ materia.nome }} (Professor: {{ materia.professor.nome }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você ainda não está matriculado em nenhuma matéria.</p>
+    {% endif %}
+</body>
+</html>

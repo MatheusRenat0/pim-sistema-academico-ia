@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session # type: ignore
 from models import db, Usuario, Materia, Inscricao, Atividade, Entrega, Presenca
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy  # type: ignore
 from functools import wraps
 
 app = Flask(__name__)

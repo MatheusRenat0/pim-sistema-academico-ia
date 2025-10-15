@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session # type: ignore
+from flask import Flask, render_template, request, redirect, url_for, session
 from models import db, Usuario, Materia, Inscricao, Atividade, Entrega, Presenca
-from flask_sqlalchemy import SQLAlchemy  # type: ignore
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = "chave_secrety_pim"
+app.secret_key = "chave_secreta_pim"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///academico.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -107,20 +107,36 @@ def login_diretor_page():
 
 @app.route('/login', methods=['POST'])
 def login():
+    print("=== TENTATIVA DE LOGIN ===")
+    print(f"Dados recebidos: {dict(request.form)}")
     
-    role = request.form.get('role')
-    password = request.form.get('password')
-    usuario = None
-
-    if role == 'aluno':
+    
+    if 'ra' in request.form and request.form.get('ra'):
+        
         ra = request.form.get('ra')
+        password = request.form.get('password')
+        print(f"Tentando login como ALUNO - RA: {ra}")
+        
         usuario = Usuario.query.filter_by(ra=ra, role='aluno').first()
-    elif role in ['professor', 'diretor']:
+        print(f"Aluno encontrado: {usuario}")
+        
+    elif 'email' in request.form and request.form.get('email'):
+       
         email = request.form.get('email')
-        usuario = Usuario.query.filter_by(email=email, role=role).first()
+        password = request.form.get('password')
+        print(f"Tentando login com EMAIL: {email}")
+        
+        usuario = Usuario.query.filter_by(email=email).first()
+        print(f"Usuário encontrado: {usuario}")
+        
+        if usuario and usuario.role not in ['professor', 'diretor']:
+            print("Usuário encontrado mas não é professor/diretor")
+            usuario = None
+    else:
+        usuario = None
 
     if usuario and usuario.check_senha(password):
-        
+        print("✅ SENHA CORRETA - LOGIN BEM-SUCEDIDO!")
         session['authenticated'] = True
         session['user_id'] = usuario.id
         session['username'] = usuario.nome
@@ -133,6 +149,7 @@ def login():
         elif usuario.role == 'diretor':
             return redirect(url_for('dashboard_diretor'))
     
+    print(" LOGIN FALHOU!")
     return '<h1>Usuário ou senha inválidos.</h1><a href="/">Voltar</a>'
 
 

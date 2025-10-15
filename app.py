@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from models import db, Usuario, Materia, Inscricao, Atividade, Entrega, Presenca
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "chave_secreta_pim"
@@ -97,6 +98,64 @@ def responder_atividade(atividade_id):
         entrega=entrega_existente
     )
 
+@app.route('/dashboard/professor')
+@login_required(role='professor')
+def dashboard_professor():
+    
+    professor = Usuario.query.get(session['user_id'])
+    
+    materias = Materia.query.filter_by(professor_id=professor.id).all()
+    
+    return render_template('professores/dashboard_professor.html', professor=professor, materias=materias)
+
+@app.route('/professor/materia/<int:materia_id>')
+@login_required(role='professor')
+def materia_detalhes_professor(materia_id):
+    materia = Materia.query.get_or_404(materia_id)
+    
+ 
+    if materia.professor_id != session['user_id']:
+        return "Acesso Negado!", 403
+        
+ 
+    inscricoes = Inscricao.query.filter_by(materia_id=materia.id).all()
+    alunos = [inscricao.aluno for inscricao in inscricoes]
+    
+  
+    atividades = Atividade.query.filter_by(materia_id=materia.id).order_by(Atividade.data_entrega.desc()).all()
+
+    return render_template('professores/materia_detalhes_prof.html', materia=materia, alunos=alunos, atividades=atividades)
+
+
+@app.route('/professor/materia/<int:materia_id>/criar_atividade', methods=['GET', 'POST'])
+@login_required(role='professor')
+def criar_atividade(materia_id):
+    materia = Materia.query.get_or_404(materia_id)
+
+    if materia.professor_id != session['user_id']:
+        return "Acesso Negado!", 403
+
+    if request.method == 'POST':
+        titulo = request.form.get('titulo')
+        descricao = request.form.get('descricao')
+        data_entrega_str = request.form.get('data_entrega')
+        
+
+        data_entrega = datetime.strptime(data_entrega_str, '%Y-%m-%d')
+
+        nova_atividade = Atividade(
+            titulo=titulo,
+            descricao=descricao,
+            data_entrega=data_entrega,
+            materia_id=materia.id
+        )
+        db.session.add(nova_atividade)
+        db.session.commit()
+        
+        return redirect(url_for('materia_detalhes_professor', materia_id=materia.id))
+
+    return render_template('professores/criar_atividade.html', materia=materia)
+
 @app.route('/login/professor')
 def login_professor_page():
     return render_template('professores/professor.html')
@@ -151,12 +210,6 @@ def login():
     
     print(" LOGIN FALHOU!")
     return '<h1>Usuário ou senha inválidos.</h1><a href="/">Voltar</a>'
-
-
-@app.route('/dashboard/professor')
-@login_required(role='professor')
-def dashboard_professor():
-    return f"<h1>Bem-vindo à sua área, Professor {session['username']}!</h1><a href='/logout'>Sair</a>"
 
 @app.route('/dashboard/diretor')
 @login_required(role='diretor')

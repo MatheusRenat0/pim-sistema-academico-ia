@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Nova Atividade</title>
+</head>
+<body>
+    <header>
+        <h1>Criar Nova Atividade para: {{ materia.nome }}</h1>
+    </header>
+
+    <main>
+        <form action="" method="POST">
+            <div>
+                <label for="titulo">Título:</label><br>
+                <input type="text" id="titulo" name="titulo" required size="50">
+            </div>
+            <br>
+            <div>
+                <label for="descricao">Descrição:</label><br>
+                <textarea id="descricao" name="descricao" rows="6" cols="50" required></textarea>
+            </div>
+            <br>
+            <div>
+                <label for="data_entrega">Data de Entrega:</label><br>
+                <input type="date" id="data_entrega" name="data_entrega" required>
+            </div>
+            <br>
+            <button type="submit">Salvar Atividade</button>
+        </form>
+        <br>
+        <a href="{{ url_for('materia_detalhes_professor', materia_id=materia.id) }}">Cancelar</a>
+    </main>
+</body>
+</html>

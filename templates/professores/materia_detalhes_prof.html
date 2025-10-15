@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Matéria - {{ materia.nome }}</title>
+</head>
+<body>
+    <header>
+        <h1>Matéria: {{ materia.nome }}</h1>
+        <a href="{{ url_for('dashboard_professor') }}">Voltar ao Painel</a>
+    </header>
+
+    <main>
+        <section id="alunos">
+            <h3>Alunos Inscritos</h3>
+            {% if alunos %}
+                <ul>
+                    {% for aluno in alunos %}
+                        <li>{{ aluno.nome }} (RA: {{ aluno.ra }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum aluno inscrito nesta matéria.</p>
+            {% endif %}
+        </section>
+
+        <hr>
+
+        <section id="atividades">
+            <h3>Atividades</h3>
+             {% if atividades %}
+                <ul>
+                    {% for atividade in atividades %}
+                        <li>
+                            <strong>{{ atividade.titulo }}</strong> - 
+                            Entregar até: {{ atividade.data_entrega.strftime('%d/%m/%Y') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhuma atividade foi criada.</p>
+            {% endif %}
+            <br>
+            <a href="{{ url_for('criar_atividade', materia_id=materia.id) }}">
+                + Criar Nova Atividade
+            </a>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Professor</title>
+</head>
+<body>
+    <header>
+        <h1>Painel do Professor - {{ professor.nome }}</h1>
+        <a href="{{ url_for('logout') }}">Sair</a>
+    </header>
+
+    <main>
+        <h2>Suas Matérias</h2>
+        {% if materias %}
+            <ul>
+                {% for materia in materias %}
+                <li>
+                    <a href="{{ url_for('materia_detalhes_professor', materia_id=materia.id) }}">
+                        {{ materia.nome }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Você não tem matérias atribuídas.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

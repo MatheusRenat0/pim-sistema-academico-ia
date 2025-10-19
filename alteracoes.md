@@ -8,3 +8,5 @@ Rapaziada, quando foram testar algo, abram o app.py e executem o arquivo ele vai
 "
 # Baixem os requirements: pip install -r requirements.txt
 
+
+# Foram realizadas melhorias nas interfaces das abas de Alunos e Professores, e com isso ajustei a responsividade para todo tipo de aparelho.

@@ -1,28 +1,31 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    margin: 0;
 }
 
 .container {
     display: flex;
-    width: 90%;
-    max-width: 1200px;
-    height: 90vh;
+    width: 100%;
+    max-width: 1400px;
+    min-height: 90vh;
     background: white;
     border-radius: 20px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .left {
     flex: 1;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 50px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,13 +44,13 @@ body {
 }
 
 .left h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 20px;
     font-weight: 700;
 }
 
 .left p {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     line-height: 1.6;
     margin-bottom: 15px;
     opacity: 0.9;
@@ -59,7 +62,7 @@ body {
 
 .right {
     flex: 1;
-    padding: 50px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,8 +73,8 @@ body {
 .welcome {
     text-align: center;
     color: #333;
-    margin-bottom: 40px;
-    font-size: 2rem;
+    margin-bottom: 30px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 300;
 }
 
@@ -82,11 +85,12 @@ body {
 
 .login-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
 }
+
 .login-form {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
@@ -95,7 +99,7 @@ body {
     text-align: center;
     color: #333;
     margin-bottom: 5px;
-    font-size: 1.5rem;
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
     font-weight: 600;
 }
 
@@ -103,7 +107,7 @@ body {
     text-align: center;
     color: #666;
     margin-bottom: 25px;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
 }
 
 /* GRUPOS DE FORMULÁRIO */
@@ -116,7 +120,7 @@ body {
     margin-bottom: 8px;
     color: #333;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
 }
 
 .form-group input {
@@ -127,6 +131,7 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
     background: white;
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -147,10 +152,11 @@ body {
     display: flex;
     gap: 12px;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
 
 .login-btn {
-    padding: 14px 24px;
+    padding: 14px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -158,6 +164,7 @@ body {
     font-weight: 600;
     transition: all 0.3s ease;
     flex: 1;
+    min-width: 120px;
     background: #667eea;
     color: white;
 }
@@ -177,7 +184,7 @@ body {
 
 .footer p {
     margin-bottom: 8px;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
     color: #666;
 }
 
@@ -185,26 +192,6 @@ body {
     color: #333;
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        margin: 20px;
-    }
-    
-    .left, .right {
-        padding: 30px;
-    }
-    
-    .left {
-        text-align: center;
-    }
-    
-    .welcome {
-        font-size: 1.5rem;
-    }
-}
 /* CAIXAS DE AJUDA MELHORADAS */
 .input-help-box {
     background: #e3f2fd;
@@ -220,7 +207,6 @@ body {
     color: #0d47a1;
 }
 
-
 .test-credentials {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -233,7 +219,7 @@ body {
 .test-credentials h4 {
     text-align: center;
     margin-bottom: 15px;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     color: white;
 }
 
@@ -243,6 +229,7 @@ body {
     align-items: center;
     padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
 }
 
 .credential-item:last-child {
@@ -251,14 +238,16 @@ body {
 
 .credential-role {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
     flex: 1;
+    min-width: 100px;
 }
 
 .credential-data {
     flex: 2;
     text-align: right;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+    min-width: 150px;
 }
 
 .credential-data strong {
@@ -271,7 +260,7 @@ body {
     border-radius: 6px;
     margin-top: 12px;
     text-align: center;
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 1.5vw, 0.85rem);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -279,18 +268,215 @@ body {
 .login-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 16px 24px;
+    padding: 16px 20px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     font-weight: 600;
     transition: all 0.3s ease;
     flex: 1;
+    min-width: 120px;
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .login-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* RESPONSIVIDADE AVANÇADA */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+    }
+    
+    .left, .right {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 98%;
+        border-radius: 15px;
+    }
+    
+    .left, .right {
+        padding: 30px 20px;
+    }
+    
+    .login-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        min-height: auto;
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    .left, .right {
+        padding: 30px 20px;
+        width: 100%;
+    }
+    
+    .left {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .welcome {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .login-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .test-credentials {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        margin: 5px;
+        border-radius: 12px;
+        min-height: auto;
+    }
+    
+    .left, .right {
+        padding: 25px 15px;
+    }
+    
+    .left {
+        padding: 30px 15px;
+    }
+    
+    .login-form {
+        padding: 15px;
+        border-radius: 12px;
+    }
+    
+    .form-group input {
+        padding: 12px;
+    }
+    
+    .credential-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .credential-data {
+        text-align: left;
+        margin-top: 5px;
+        width: 100%;
+    }
+    
+    .test-credentials {
+        margin-top: 20px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        margin: 0;
+        border-radius: 10px;
+    }
+    
+    .left, .right {
+        padding: 20px 12px;
+    }
+    
+    .login-form {
+        padding: 12px;
+    }
+    
+    .button-group {
+        gap: 8px;
+    }
+    
+    .login-btn {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Para telas muito grandes */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1500px;
+    }
+    
+    .left, .right {
+        padding: 60px 50px;
+    }
+    
+    .login-container {
+        max-width: 500px;
+    }
+}
+
+/* Ajustes para orientação landscape em celulares */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        min-height: auto;
+        height: auto;
+    }
+    
+    .left, .right {
+        padding: 20px 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .button-group {
+        margin-top: 20px;
+    }
+}
+
+/* Suporte para dispositivos com telas muito pequenas */
+@media (max-width: 320px) {
+    .left h2 {
+        font-size: 1.5rem;
+    }
+    
+    .welcome {
+        font-size: 1.3rem;
+    }
+    
+    .form-title {
+        font-size: 1.2rem;
+    }
+    
+    .login-btn {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+    }
 }

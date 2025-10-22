@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Alunos</title>
+</head>
+<body>
+    <h1>Gerenciamento de Alunos</h1>
+    
+    <a href="{{ url_for('cadastrar_aluno') }}">
+        <button>Cadastrar Novo Aluno</button>
+    </a>
+    <a href="{{ url_for('dashboard_diretor') }}">
+        <button>Voltar ao Dashboard</button>
+    </a>
+    <hr>
+
+    <h2>Alunos Cadastrados</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>RA</th>
+                <th>Nome</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.ra }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.email }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nenhum aluno cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

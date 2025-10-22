@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Professores</title>
+</head>
+<body>
+    <h1>Gerenciamento de Professores</h1>
+    
+    <a href="{{ url_for('cadastrar_professor') }}">
+        <button>Cadastrar Novo Professor</button>
+    </a>
+    <a href="{{ url_for('dashboard_diretor') }}">
+        <button>Voltar ao Dashboard</button>
+    </a>
+    <hr>
+
+    <h2>Professores Cadastrados</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prof in professores %}
+            <tr>
+                <td>{{ prof.id }}</td>
+                <td>{{ prof.nome }}</td>
+                <td>{{ prof.email }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nenhum professor cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

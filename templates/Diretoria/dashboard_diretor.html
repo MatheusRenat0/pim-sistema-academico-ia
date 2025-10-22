@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Diretor</title>
+</head>
+<body>
+    <h1>Área da Coordenação</h1>
+    <p>Bem-vindo, {{ session['username'] }}!</p>
+    
+    <hr>
+
+    <h2>Visão Geral</h2>
+    <ul>
+        <li><strong>Alunos Cadastrados:</strong> {{ num_alunos }}</li>
+        <li><strong>Professores Cadastrados:</strong> {{ num_professores }}</li>
+        <li><strong>Matérias Criadas:</strong> {{ num_materias }}</li>
+    </ul>
+
+    <hr>
+
+    <h2>Gerenciamento</h2>
+    <ul>
+        <li><a href="{{ url_for('gerenciar_professores') }}">Gerenciar Professores</a></li>
+        <li><a href="{{ url_for('gerenciar_alunos') }}">Gerenciar Alunos</a></li>
+        <li><a href="{{ url_for('gerenciar_materias') }}">Gerenciar Matérias</a></li>
+        <li><a href="{{ url_for('gerenciar_turmas') }}">Gerenciar Turmas</a></li>
+    </ul>
+
+    <br>
+    <a href="{{ url_for('logout') }}">Sair</a>
+</body>
+</html>

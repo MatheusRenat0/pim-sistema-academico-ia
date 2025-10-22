@@ -1,4 +1,5 @@
-from app import app, db, Usuario, Materia, Inscricao, Atividade, Presenca
+from app import app
+from models import db, Usuario, Materia, Inscricao, Atividade, Presenca, Entrega, Turma
 from datetime import datetime, date
 
 usuarios_padrao = [
@@ -97,6 +98,23 @@ def popular_banco():
             db.session.commit()
             print("- Presenças dos dias 06/10 e 07/10 registradas.")
 
+        
+        print("\nCriando Turmas...")
+        materia_eng = Materia.query.filter_by(nome="Engenharia de Software").first()
+        aluno_padrao = Usuario.query.filter_by(ra="1234567").first()
+
+        if materia_eng and aluno_padrao:
+            nova_turma = Turma(nome="ADS - 2º Semestre 2025")
+            
+           
+            nova_turma.alunos.append(aluno_padrao)
+            
+            nova_turma.materias.append(materia_eng)
+
+            db.session.add(nova_turma)
+            db.session.commit()
+            print("- Turma 'ADS - 2º Semestre 2025' criada e populada.")
+            
         print("\nProcesso de popular o banco de dados concluído!")
 
 if __name__ == '__main__':

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Professor</title>
+    <title>Cadastrar Aluno</title>
 </head>
 <body>
-    <h1>Cadastrar Novo Professor</h1>
-    <form method="POST" action="{{ url_for('cadastrar_professor') }}">
-        <label for="nome">Nome:</label><br>
+    <h1>Cadastrar Novo Aluno</h1>
+    <form method="POST" action="{{ url_for('cadastrar_aluno') }}">
+        <label for="ra">RA:</label><br>
+        <input type="text" id="ra" name="ra" required><br><br>
+
+        <label for="nome">Nome Completo:</label><br>
         <input type="text" id="nome" name="nome" required><br><br>
 
         <label for="email">Email:</label><br>
@@ -17,10 +20,10 @@
         <label for="senha">Senha Provisória:</label><br>
         <input type="password" id="senha" name="senha" required><br><br>
 
-        <button type="submit">Cadastrar Professor</button>
+        <button type="submit">Cadastrar Aluno</button>
     </form>
     <br>
-    <a href="{{ url_for('gerenciar_professores') }}">
+    <a href="{{ url_for('gerenciar_alunos') }}">
         <button type="button">Cancelar</button>
     </a>
 </body>

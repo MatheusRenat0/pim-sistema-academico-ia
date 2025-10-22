@@ -5,6 +5,17 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+turma_alunos = db.Table('turma_alunos',
+    db.Column('turma_id', db.Integer, db.ForeignKey('turmas.id'), primary_key=True),
+    db.Column('aluno_id', db.Integer, db.ForeignKey('usuarios.id'), primary_key=True)
+)
+
+turma_materias = db.Table('turma_materias',
+    db.Column('turma_id', db.Integer, db.ForeignKey('turmas.id'), primary_key=True),
+    db.Column('materia_id', db.Integer, db.ForeignKey('materias.id'), primary_key=True)
+)
+
+
 class Usuario(db.Model):
   
     __tablename__ = 'usuarios'
@@ -16,6 +27,8 @@ class Usuario(db.Model):
     senha_hash = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), nullable=False) 
 
+    turmas = db.relationship('Turma', secondary=turma_alunos, back_populates='alunos')
+
     def set_senha(self, senha):
        
         self.senha_hash = generate_password_hash(senha)
@@ -26,6 +39,18 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return f'<Usuario {self.nome} ({self.role})>'
+
+class Turma(db.Model):
+    __tablename__ = 'turmas'
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), unique=True, nullable=False)
+
+    alunos = db.relationship('Usuario', secondary=turma_alunos, back_populates='turmas')
+    
+    materias = db.relationship('Materia', secondary=turma_materias, back_populates='turmas')
+
+    def __repr__(self):
+        return f'<Turma {self.nome}>'
     
 class Materia(db.Model):
     __tablename__ = 'materias'
@@ -34,6 +59,9 @@ class Materia(db.Model):
     professor_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
     
     professor = db.relationship('Usuario', backref='materias_lecionadas')
+
+   
+    turmas = db.relationship('Turma', secondary=turma_materias, back_populates='materias')
 
 class Inscricao(db.Model):
     __tablename__ = 'inscricoes'
@@ -57,7 +85,7 @@ class Atividade(db.Model):
 class Entrega(db.Model):
     __tablename__ = 'entregas'
     id = db.Column(db.Integer, primary_key=True)
-    conteudo = db.Column(db.Text) # Resposta do aluno
+    conteudo = db.Column(db.Text) 
     data_envio = db.Column(db.DateTime, default=datetime.utcnow)
     nota = db.Column(db.Float)
     aluno_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)

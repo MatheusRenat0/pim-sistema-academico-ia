@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from models import db, Usuario, Materia, Inscricao, Atividade, Entrega, Presenca
+from models import db, Usuario, Materia, Inscricao, Atividade, Entrega, Presenca, Turma
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from datetime import datetime
@@ -160,9 +160,20 @@ def criar_atividade(materia_id):
 def login_professor_page():
     return render_template('professores/professor.html')
 
-@app.route('/login/diretor')
-def login_diretor_page():
-    return render_template('Diretoria/login_diretor.html')
+@app.route('/dashboard/diretor')
+@login_required(role='diretor')
+def dashboard_diretor():
+
+    num_alunos = Usuario.query.filter_by(role='aluno').count()
+    num_professores = Usuario.query.filter_by(role='professor').count()
+    num_materias = Materia.query.count()
+    
+    return render_template(
+        'Diretoria/dashboard_diretor.html',
+        num_alunos=num_alunos,
+        num_professores=num_professores,
+        num_materias=num_materias
+    )
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -211,10 +222,116 @@ def login():
     print(" LOGIN FALHOU!")
     return '<h1>Usuário ou senha inválidos.</h1><a href="/">Voltar</a>'
 
-@app.route('/dashboard/diretor')
+@app.route('/diretor/professores')
 @login_required(role='diretor')
-def dashboard_diretor():
-    return f"<h1>Bem-vindo à sua área, Diretor {session['username']}!</h1><a href='/logout'>Sair</a>"
+def gerenciar_professores():
+    professores = Usuario.query.filter_by(role='professor').all()
+    return render_template('Diretoria/gerenciar_professores.html', professores=professores)
+
+@app.route('/diretor/cadastrar_professor', methods=['GET', 'POST'])
+@login_required(role='diretor')
+def cadastrar_professor():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+
+        if Usuario.query.filter_by(email=email).first():
+            return "Erro: Este e-mail já está cadastrado.", 400
+
+        novo_professor = Usuario(
+            nome=nome,
+            email=email,
+            role='professor'
+        )
+        novo_professor.set_senha(senha)
+        
+        db.session.add(novo_professor)
+        db.session.commit()
+        
+        return redirect(url_for('gerenciar_professores'))
+
+    return render_template('Diretoria/Cadastro_Professores.html')
+
+@app.route('/diretor/turmas')
+@login_required(role='diretor')
+def gerenciar_turmas():
+    turmas = Turma.query.all()
+    return render_template('Diretoria/gerenciar_turmas.html', turmas=turmas)
+
+@app.route('/diretor/cadastrar_turma', methods=['GET', 'POST'])
+@login_required(role='diretor')
+def cadastrar_turma():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+
+        if Turma.query.filter_by(nome=nome).first():
+            
+            return "Erro: Já existe uma turma com este nome.", 400
+
+        nova_turma = Turma(nome=nome)
+        db.session.add(nova_turma)
+        db.session.commit()
+        
+        return redirect(url_for('gerenciar_turmas'))
+
+    return render_template('Diretoria/Cadastro_Turmas.html')
+
+@app.route('/diretor/alunos')
+@login_required(role='diretor')
+def gerenciar_alunos():
+    alunos = Usuario.query.filter_by(role='aluno').all()
+    return render_template('Diretoria/gerenciar_alunos.html', alunos=alunos)
+
+@app.route('/diretor/cadastrar_aluno', methods=['GET', 'POST'])
+@login_required(role='diretor')
+def cadastrar_aluno():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        ra = request.form.get('ra')
+        senha = request.form.get('senha')
+
+        if Usuario.query.filter_by(email=email).first() or Usuario.query.filter_by(ra=ra).first():
+            return "Erro: Email ou RA já cadastrado.", 400
+
+        novo_aluno = Usuario(
+            nome=nome,
+            email=email,
+            ra=ra,
+            role='aluno'
+        )
+        novo_aluno.set_senha(senha)
+        db.session.add(novo_aluno)
+        db.session.commit()
+        
+        return redirect(url_for('gerenciar_alunos'))
+
+    return render_template('Diretoria/Cadastro_Alunos.html')
+
+
+@app.route('/diretor/materias')
+@login_required(role='diretor')
+def gerenciar_materias():
+    materias = Materia.query.all()
+    professores = Usuario.query.filter_by(role='professor').all()
+    return render_template('Diretoria/gerenciar_materias.html', materias=materias, professores=professores)
+
+
+@app.route('/diretor/cadastrar_materia', methods=['POST'])
+@login_required(role='diretor')
+def cadastrar_materia():
+    nome = request.form.get('nome')
+    professor_id = request.form.get('professor_id')
+
+    if Materia.query.filter_by(nome=nome).first():
+        return "Erro: Já existe uma matéria com este nome.", 400
+    
+    nova_materia = Materia(nome=nome, professor_id=professor_id)
+    db.session.add(nova_materia)
+    db.session.commit()
+
+    return redirect(url_for('gerenciar_materias'))
 
 @app.route('/logout')
 def logout():

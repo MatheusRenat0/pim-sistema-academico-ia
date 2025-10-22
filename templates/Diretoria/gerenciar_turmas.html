@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Turmas</title>
+</head>
+<body>
+    <h1>Gerenciamento de Turmas</h1>
+    
+    <a href="{{ url_for('cadastrar_turma') }}">
+        <button>Cadastrar Nova Turma</button>
+    </a>
+    <a href="{{ url_for('dashboard_diretor') }}">
+        <button>Voltar ao Dashboard</button>
+    </a>
+    <hr>
+
+    <h2>Turmas Cadastradas</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Nº de Alunos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turma in turmas %}
+            <tr>
+                <td>{{ turma.id }}</td>
+                <td>{{ turma.nome }}</td>
+                <td>{{ turma.alunos|length }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Nenhuma turma cadastrada.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

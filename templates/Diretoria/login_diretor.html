@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Diretor</title>
 </head>
 <body>
     <section id="Coordenador/Diretor">
             <h2>Coordenador/Diretor</h2>
             <p>Preencha seus dados abaixo para acessar o sistema.</p>
 
-            <form>  <!-- Nome e senha para login -->
-                <label for="nomeCoordenador/Diretor">Nome do Coordenador/Diretor:</label>
-                <input type="text" id="nomeCoordenador/Diretor" name="nomeCoordenador/Diretor">
+            <form method="POST" action="{{ url_for('login') }}">
+                <label for="email">Email do Coordenador/Diretor:</label>
+                <input type="email" id="email" name="email" required>
                 <br><br>
-                <label for="Password">Password:</label>
-                <input type="password" id="password" name="Password">
-                <!-- Botão para entrar -->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <br><br>
                 <button type="submit">Entrar</button>
                 <br><br>
-            <!-- Botão de voltar -->
-            <a href="../index.html">
-                <button type="button">Voltar </button>
+            
+            <a href="{{ url_for('index') }}">
+                <button type="button">Voltar</button>
             </a>
             </form>
         </section>

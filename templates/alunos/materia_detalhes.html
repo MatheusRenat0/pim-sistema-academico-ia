@@ -4,220 +4,140 @@
     <meta charset="UTF-8">
     <title>Detalhes de {{ materia.nome }}</title>
     <style>
-    :root {
-        --primary-color: #4a6fa5;
-        --secondary-color: #6b8cbc;
-        --primary-light: #e8eef7;
-        --shadow-color: rgba(74, 111, 165, 0.15);
-        --text-color: #2c3e50;
-        --border-color: #e0e0e0;
-        --success-color: #27ae60;
-        --warning-color: #f39c12;
-        --danger-color: #e74c3c;
-        --background-color: #f8fafc;
-    }
-    
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        background-color: var(--background-color);
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    h1 {
-        color: var(--primary-color);
-        font-size: 2.2rem;
-        margin-bottom: 10px;
-        font-weight: 700;
-    }
-    
-    h2 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin: 25px 0 15px 0;
-        font-weight: 600;
-        padding-bottom: 8px;
-        border-bottom: 2px solid var(--primary-light);
-    }
-    
-    
-    a {
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    
-    a[href*="dashboard"] {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: white;
-        color: var(--primary-color);
-        border-radius: 8px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 12px var(--shadow-color);
-        border: 1px solid var(--secondary-color);
-    }
-    
-    a[href*="dashboard"]:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px var(--shadow-color);
-        background-color: var(--primary-light);
-    }
-    
-    a[href*="responder_atividade"] {
-        color: var(--primary-color);
-        font-weight: 500;
-        padding: 4px 8px;
-        border-radius: 4px;
-        display: inline-block;
-    }
-    
-    a[href*="responder_atividade"]:hover {
-        background-color: var(--primary-light);
-        text-decoration: underline;
-    }
-    
-    
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 30px;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-    
-    th, td {
-        padding: 14px 16px;
-        text-align: left;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    th {
-        background-color: var(--primary-light);
-        color: var(--primary-color);
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-    
-    tr:hover {
-        background-color: #f8fafc;
-    }
-    
-    
-    td:contains("Entregue"),
-    td:contains("Presente") {
-        color: var(--success-color);
-        font-weight: 600;
-    }
-    
-    td:contains("Pendente") {
-        color: var(--warning-color);
-        font-weight: 600;
-    }
-    
-    td:contains("Falta") {
-        color: var(--danger-color);
-        font-weight: 600;
-    }
-    
-    
-    tr td:nth-child(3):contains("Entregue"),
-    tr td:nth-child(3):contains("Presente") {
-        color: var(--success-color);
-        font-weight: 600;
-    }
-    
-    tr td:nth-child(3):contains("Pendente") {
-        color: var(--warning-color);
-        font-weight: 600;
-    }
-    
-    tr td:nth-child(2):contains("Falta") {
-        color: var(--danger-color);
-        font-weight: 600;
-    }
-    
-    
-    @media (max-width: 768px) {
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --text: #333;
+            --radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            padding: 15px;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        h1 {
-            font-size: 1.8rem;
+
+        h1 { 
+            color: var(--primary); 
+            font-size: 2.2rem; 
+            margin-bottom: 30px; 
+            padding-bottom: 15px; 
+            border-bottom: 2px solid rgba(0,0,0,0.1); 
+            text-align: center; 
         }
-        
-        h2 {
-            font-size: 1.3rem;
-            margin: 20px 0 12px 0;
+
+        h2 { 
+            color: var(--primary); 
+            font-size: 1.5rem; 
+            margin: 25px 0 15px; 
+            font-weight: 600; 
+            padding-bottom: 8px; 
+            border-bottom: 2px solid rgba(0,0,0,0.1); 
         }
-        
-        table {
-            display: block;
-            overflow-x: auto;
+
+        a { 
+            color: var(--secondary); 
+            text-decoration: none; 
+            transition: var(--transition); 
+        }
+
+        a:hover { color: var(--primary); }
+
+        a[href*="dashboard"] {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c3e50, #7f8c8d);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
             margin-bottom: 20px;
         }
-        
-        th, td {
-            padding: 10px 12px;
-            font-size: 0.9rem;
-            white-space: nowrap;
+
+        a[href*="dashboard"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(149,165,166,0.3);
+            background: linear-gradient(135deg, #7f8c8d, #95a5a6);
         }
-        
-        a[href*="dashboard"] {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 15px;
+
+        a[href*="responder_atividade"] {
+            color: var(--secondary);
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: var(--transition);
         }
-    }
-    
-    @media (max-width: 480px) {
-        body {
-            padding: 12px;
+
+        a[href*="responder_atividade"]:hover {
+            background: rgba(52,152,219,0.1);
+            text-decoration: underline;
         }
-        
-        h1 {
-            font-size: 1.6rem;
-        }
-        
-        h2 {
-            font-size: 1.2rem;
-        }
-        
-        th, td {
-            padding: 8px 10px;
-            font-size: 0.85rem;
-        }
-        
-        a[href*="dashboard"] {
-            padding: 10px 16px;
-            font-size: 0.9rem;
-        }
-    }
-    
-   
-    @media (min-width: 1200px) {
-        body {
-            padding: 30px;
-        }
-        
+
         table {
-            margin-bottom: 40px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
-    }
-</style>
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        tr:hover { background: rgba(0,0,0,0.02); }
+
+        .status-entregue, .status-presente { color: var(--success); font-weight: 600; }
+        .status-pendente { color: var(--warning); font-weight: 600; }
+        .status-falta { color: var(--danger); font-weight: 600; }
+
+        @media (max-width: 768px) {
+            body { padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.3rem; margin: 20px 0 12px; }
+            table { display: block; overflow-x: auto; margin-bottom: 20px; }
+            th, td { padding: 10px 12px; font-size: 0.9rem; white-space: nowrap; }
+            a[href*="dashboard"] { width: 100%; text-align: center; margin-bottom: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.2rem; }
+            th, td { padding: 8px 10px; font-size: 0.85rem; }
+            a[href*="dashboard"] { padding: 10px 16px; font-size: 0.9rem; }
+        }
+
+        @media (min-width: 1200px) {
+            body { padding: 30px; }
+            table { margin-bottom: 40px; }
+        }
+    </style>
 </head>
 <body>
     <h1>{{ materia.nome }}</h1>
@@ -243,10 +163,10 @@
                 </td>
                 <td>{{ atividade.data_entrega.strftime('%d/%m/%Y') }}</td>
                 {% if atividade.id in notas_entregas %}
-                    <td>Entregue</td>
+                    <td class="status-entregue">Entregue</td>
                     <td>{{ notas_entregas[atividade.id] if notas_entregas[atividade.id] is not none else 'Aguardando correção' }}</td>
                 {% else %}
-                    <td>Pendente</td>
+                    <td class="status-pendente">Pendente</td>
                     <td>-</td>
                 {% endif %}
             </tr>
@@ -266,7 +186,9 @@
             {% for p in presencas %}
             <tr>
                 <td>{{ p.data.strftime('%d/%m/%Y') }}</td>
-                <td>{{ 'Presente' if p.presente else 'Falta' }}</td>
+                <td class="{% if p.presente %}status-presente{% else %}status-falta{% endif %}">
+                    {{ 'Presente' if p.presente else 'Falta' }}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

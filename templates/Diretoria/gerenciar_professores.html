@@ -4,6 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Professores</title>
+    <style>
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+        }
+
+        
+        a button {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        a button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+            background: linear-gradient(135deg, #2980b9 0%, var(--secondary-color) 100%);
+        }
+
+        
+        hr {
+            border: none;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 15px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        tbody tr {
+            transition: var(--transition);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        
+        tbody tr td[colspan] {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            padding: 30px;
+        }
+
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            a button {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Gerenciamento de Professores</h1>

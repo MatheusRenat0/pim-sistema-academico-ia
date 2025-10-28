@@ -12,4 +12,8 @@ Rapaziada, quando foram testar algo, abram o app.py e executem o arquivo ele vai
 # Foram realizadas melhorias nas interfaces das abas de Alunos e Professores, e com isso ajustei a responsividade para todo tipo de aparelho.
 
 
+<<<<<<< HEAD
 # Area da coordenação finalizada. 
+=======
+# Foram realizadas melhorias nas interfaces das abas da diretoria
+>>>>>>> 3eff4e7eb00c321ad79ed1b80100e0bb420e6bfb

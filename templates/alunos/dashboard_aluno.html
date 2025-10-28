@@ -155,7 +155,7 @@
     {% if materias %}
         <div class="materias-grid">
             {% for materia in materias %}
-                <a href="{{ url_for('materia_detalhes', materia_id=materia.id) }}" class="materia-card">
+                <a href="{{ url_for('materia_detalhes_aluno', materia_id=materia.id) }}" class="materia-card">
                     <div class="materia-nome">{{ materia.nome }}</div>
                     <div class="materia-professor">Professor: {{ materia.professor.nome }}</div>
                 </a>

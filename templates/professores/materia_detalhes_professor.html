@@ -12,6 +12,12 @@
             --text-color: #333333;
             --border-color: #e1e5e9;
             --shadow: 0 2px 10px rgba(74, 111, 165, 0.1);
+            --success-bg: #d4edda;
+            --success-text: #155724;
+            --success-border: #c3e6cb;
+            --danger-bg: #f8d7da;
+            --danger-text: #721c24;
+            --danger-border: #f5c6cb;
         }
 
         * {
@@ -59,7 +65,7 @@
                 justify-content: space-between;
                 align-items: center;
             }
-            
+
             header h1 {
                 margin-bottom: 0;
             }
@@ -81,6 +87,7 @@
             gap: 0.5rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
         }
 
         header a:hover {
@@ -171,7 +178,7 @@
             font-style: italic;
         }
 
-    
+
         section {
             animation: fadeInUp 0.6s ease-out;
         }
@@ -192,21 +199,56 @@
             outline-offset: 2px;
         }
 
+        /* Estilos Flash Messages */
+        .flash-messages { margin-bottom: 1rem; }
+        .alert { padding: 1rem; border-radius: 4px; border: 1px solid transparent; }
+        .alert-success { background-color: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+        .alert-danger { background-color: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border); }
+
+        /* Estilos APENAS para a seção de presença */
+        .presenca-section .form-group { margin-bottom: 1rem; }
+        .presenca-section label { margin-right: 1rem; font-weight: 500;}
+        .presenca-section input[type="date"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .lista-alunos-presenca { list-style: none; padding: 0; margin-top: 1rem; }
+        .lista-alunos-presenca li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;}
+        .aluno-nome { font-weight: 500; flex-grow: 1; min-width: 150px;}
+        .opcoes-presenca { display: flex; gap: 15px; flex-shrink: 0; }
+        .radio-label { cursor: pointer; display: inline-flex; align-items: center;}
+        .radio-label input { margin-right: 5px; }
+        .presenca-section button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+        }
+         .presenca-section button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.3);
+        }
+
         @media (max-width: 480px) {
             main {
                 padding: 1rem;
             }
-            
+
             section {
                 padding: 1rem;
                 margin-bottom: 1.5rem;
             }
-            
+
             h3 {
                 font-size: 1.1rem;
             }
-            
-            #atividades a {
+
+            #atividades a, .presenca-section button[type="submit"] {
                 width: 100%;
                 justify-content: center;
                 text-align: center;
@@ -216,17 +258,62 @@
 </head>
 <body>
     <header>
-        <h1>Matéria: {{ materia.nome }}</h1>
-        <a href="{{ url_for('dashboard_professor') }}">Voltar ao Painel</a>
+        <div class="header-container">
+            <h1>Matéria: {{ materia.nome }}</h1>
+            <a href="{{ url_for('dashboard_professor') }}">Voltar ao Painel</a>
+        </div>
     </header>
 
     <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <section class="presenca-section">
+            <h3>Registrar Presença</h3>
+            <form action="{{ url_for('registrar_presenca', materia_id=materia.id) }}" method="POST">
+                <div class="form-group">
+                    <label for="data_presenca">Data da Aula:</label>
+                    <input type="date" id="data_presenca" name="data_presenca" value="{{ today_date }}" required>
+                </div>
+
+                {% if alunos %}
+                    <ul class="lista-alunos-presenca">
+                        {% for aluno in alunos %}
+                        <li class="aluno-item">
+                            <span class="aluno-nome">{{ aluno.nome }} (RA: {{ aluno.ra or 'N/A' }})</span>
+                            <div class="opcoes-presenca">
+                                <label class="radio-label">
+                                    <input type="radio" name="presenca_{{ aluno.id }}" value="presente" checked> Presente
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="presenca_{{ aluno.id }}" value="ausente"> Ausente
+                                </label>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <button type="submit">Salvar Presença</button>
+                {% else %}
+                    <p>Nenhum aluno inscrito nesta matéria.</p>
+                {% endif %}
+            </form>
+        </section>
+
+        <hr>
+
         <section id="alunos">
             <h3>Alunos Inscritos</h3>
             {% if alunos %}
                 <ul>
                     {% for aluno in alunos %}
-                        <li>{{ aluno.nome }} (RA: {{ aluno.ra }})</li>
+                        <li>{{ aluno.nome }} (RA: {{ aluno.ra or 'N/A'}})</li>
                     {% endfor %}
                 </ul>
             {% else %}
@@ -242,8 +329,10 @@
                 <ul>
                     {% for atividade in atividades %}
                         <li>
-                            <strong>{{ atividade.titulo }}</strong> - 
+                            <strong>{{ atividade.titulo }}</strong> -
                             Entregar até: {{ atividade.data_entrega.strftime('%d/%m/%Y') }}
+                             <a href="{{ url_for('criar_atividade', materia_id=materia.id, atividade_id=atividade.id) }}" style="font-size: 0.8em; margin-left: 10px;">(Editar)</a>
+                             <a href="{{ url_for('ver_entregas', atividade_id=atividade.id) }}" style="font-size: 0.8em; margin-left: 10px;">(Ver Entregas)</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -258,3 +347,4 @@
     </main>
 </body>
 </html>
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Responder Atividade - {{ atividade.titulo }}</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cbc;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e5e9;
+            --shadow: 0 4px 12px rgba(74, 111, 165, 0.1);
+            --success-bg: #d4edda;
+            --success-text: #155724;
+            --success-border: #c3e6cb;
+            --danger-bg: #f8d7da;
+            --danger-text: #721c24;
+            --danger-border: #f5c6cb;
+            --info-bg: #d1ecf1;
+            --info-text: #0c5460;
+            --info-border: #bee5eb;
+            --warning-bg: #fff3cd;
+            --warning-text: #856404;
+            --warning-border: #ffeeba;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            background-color: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px; /* Aumentado um pouco */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button[type="submit"]:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .entrega-info {
+            background-color: #f0f8ff; /* Azul bem claro */
+            padding: 1.5rem; /* Mais espaçamento */
+            border-radius: 6px;
+            border: 1px solid #d1e7fd;
+            margin-top: 1rem;
+        }
+
+        .entrega-conteudo {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background: #e9ecef; /* Cinza claro */
+            padding: 15px; /* Mais padding */
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ced4da;
+        }
+
+        .nota-info {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 1rem; /* Espaço acima da nota */
+        }
+
+        .aguardando-nota {
+            color: #888;
+            font-style: italic;
+            font-weight: normal; /* Normalizar peso */
+        }
+
+        .flash-messages {
+            margin-bottom: 1rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .alert-success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border-color: var(--success-border);
+        }
+
+        .alert-danger {
+            background-color: var(--danger-bg);
+            color: var(--danger-text);
+            border-color: var(--danger-border);
+        }
+
+        .alert-info {
+            background-color: var(--info-bg);
+            color: var(--info-text);
+            border-color: var(--info-border);
+        }
+
+        .alert-warning {
+            background-color: var(--warning-bg);
+            color: var(--warning-text);
+            border-color: var(--warning-border);
+        }
+
+        /* Melhorar label do textarea */
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('materia_detalhes_aluno', materia_id=atividade.materia_id) }}" class="back-link">&larr; Voltar para {{ atividade.materia.nome }}</a>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h1>{{ atividade.titulo }}</h1>
+            <p><strong>Data de Entrega Limite:</strong> {{ atividade.data_entrega.strftime('%d/%m/%Y') }}</p>
+            <h2>Descrição</h2>
+            {# Usamos 'safe' aqui caso a descrição tenha HTML formatado pelo professor #}
+            <p>{{ atividade.descricao | safe }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Sua Resposta</h2>
+            {% if entrega %}
+                {# --- SE O ALUNO JÁ ENTREGOU --- #}
+                <div class="entrega-info">
+                    <p><strong>Você entregou esta atividade em:</strong> {{ entrega.data_envio.strftime('%d/%m/%Y %H:%M:%S') }}</p>
+                    <h3>Conteúdo Enviado:</h3>
+                    <div class="entrega-conteudo">
+                        {{ entrega.conteudo }}
+                    </div>
+                    <p class="nota-info">
+                        <strong>Nota:</strong>
+                        {% if entrega.nota is not none %}
+                            {{ entrega.nota }}
+                        {% else %}
+                            <span class="aguardando-nota">Aguardando correção</span>
+                        {% endif %}
+                    </p>
+                </div>
+            {% else %}
+                {# --- SE O ALUNO AINDA NÃO ENTREGOU --- #}
+                <form method="POST" action="{{ url_for('responder_atividade', atividade_id=atividade.id) }}">
+                    <label for="resposta">Digite sua resposta:</label>
+                    <textarea id="resposta" name="resposta" rows="10" required placeholder="Escreva sua resposta aqui..."></textarea>
+                    <button type="submit">Enviar Resposta</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+

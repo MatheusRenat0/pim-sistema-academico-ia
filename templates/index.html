@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIGMA - Sistema Acadêmico</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
     <div class="container">
@@ -25,78 +24,76 @@
             <p>O SIGMA é mais do que um aplicativo, é uma ponte entre a escola e a comunidade escolar.</p>
         </div>
 
-        
         <div class="right">
             <h1 class="welcome">Bem-vindo ao <span>SIGMA</span></h1>
+            <p class="sigma-meaning">SIGMA — Sistema Integrado de Gestão e Monitoramento Acadêmico</p>
 
             <div class="login-container">
-                
-<div class="login-form">
-    <h3 class="form-title">Login</h3>
-    <p class="form-subtitle">Digite suas credenciais de acesso</p>
-    
-    <form action="{{ url_for('login') }}" method="POST">
-        
-        <div class="form-group">
-            <label for="ra">📘 RA (Registro Acadêmico):</label>
-            <input type="text" id="ra" name="ra" placeholder="Digite seu RA (apenas para alunos)" maxlength="20">
-            <div class="input-help-box">
-                🎓 <strong>Para alunos:</strong> Digite seu RA (ex: 1234567)
+                <div class="login-form">
+                    <h3 class="form-title">Login</h3>
+                    <p class="form-subtitle">Digite suas credenciais de acesso</p>
+                    
+                    <form action="{{ url_for('login') }}" method="POST">
+                        
+                        <div class="form-group">
+                            <label for="ra">📘 RA (Registro Acadêmico):</label>
+                            <input type="text" id="ra" name="ra" placeholder="Digite seu RA (apenas para alunos)" maxlength="20">
+                            <div class="input-help-box">
+                                🎓 <strong>Para alunos:</strong> Digite seu RA (ex: 1234567)
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">📧 Email Institucional:</label>
+                            <input type="email" id="email" name="email" placeholder="seu.email@escola.com">
+                            <div class="input-help-box">
+                                👨‍🏫 <strong>Para professores/coordenação:</strong> Digite seu email institucional
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">🔒 Senha:</label>
+                            <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="submit" class="login-btn">Entrar no SIGMA</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="test-credentials">
+                    <h4>🎯 Dados para Teste</h4>
+                    <div class="credential-item">
+                        <span class="credential-role">👨‍🎓 ALUNO:</span>
+                        <span class="credential-data">RA <strong>1234567</strong> | Senha: <strong>aluno123</strong></span>
+                    </div>
+                    <div class="credential-item">
+                        <span class="credential-role">👨‍🏫 PROFESSOR:</span>
+                        <span class="credential-data">Email <strong>professor@exemplo.com</strong> | Senha: <strong>prof123</strong></span>
+                    </div>
+                    <div class="credential-item">
+                        <span class="credential-role">🏫 COORDENAÇÃO:</span>
+                        <span class="credential-data">Email <strong>diretor@exemplo.com</strong> | Senha: <strong>diretor123</strong></span>
+                    </div>
+                    <div class="credential-note">
+                        💡 <strong>Dica:</strong> Preencha apenas um campo (RA ou Email) conforme seu perfil
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="form-group">
-            <label for="email">📧 Email Institucional:</label>
-            <input type="email" id="email" name="email" placeholder="seu.email@escola.com">
-            <div class="input-help-box">
-                👨‍🏫 <strong>Para professores/coordenação:</strong> Digite seu email institucional
-            </div>
-        </div>
-        
-        
-        <div class="form-group">
-            <label for="password">🔒 Senha:</label>
-            <input type="password" id="password" name="password" required placeholder="Digite sua senha">
-        </div>
-        
-        <div class="button-group">
-            <button type="submit" class="login-btn">Entrar no SIGMA</button>
-        </div>
-    </form>
-</div>
+    </div>
 
-
-<div class="test-credentials">
-    <h4>🎯 Dados para Teste</h4>
-    <div class="credential-item">
-        <span class="credential-role">👨‍🎓 ALUNO:</span>
-        <span class="credential-data">RA <strong>1234567</strong> | Senha: <strong>aluno123</strong></span>
-    </div>
-    <div class="credential-item">
-        <span class="credential-role">👨‍🏫 PROFESSOR:</span>
-        <span class="credential-data">Email <strong>professor@exemplo.com</strong> | Senha: <strong>prof123</strong></span>
-    </div>
-    <div class="credential-item">
-        <span class="credential-role">🏫 COORDENAÇÃO:</span>
-        <span class="credential-data">Email <strong>diretor@exemplo.com</strong> | Senha: <strong>diretor123</strong></span>
-    </div>
-    <div class="credential-note">
-        💡 <strong>Dica:</strong> Preencha apenas um campo (RA ou Email) conforme seu perfil
-    </div>
-</div>
     <script>
-        
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('ra').focus();
         });
 
-        
         document.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 document.querySelector('.login-btn').click();
             }
         });
     </script>
-
 </body>
 </html>

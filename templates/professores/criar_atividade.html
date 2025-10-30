@@ -3,205 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <title>Criar Nova Atividade</title>
-  <style>
-:root {
-    --primary-color: #2c3e50;
-    --secondary-color: #6b8cbc;
-    --light-color: #f0f5ff;
-    --dark-color: #2c3e50;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #6b8cbc;
+            --light-color: #f0f5ff;
+            --dark-color: #2c3e50;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-body {
-    background-color: #f8f9fa;
-    color: var(--dark-color);
-    line-height: 1.6;
-}
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 1.5rem 0;
-    box-shadow: var(--box-shadow);
-}
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+        }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
 
-.back-link {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    transition: var(--transition);
-}
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-.back-link:hover {
-    text-decoration: underline;
-    transform: translateX(-3px);
-}
+        .back-link:hover {
+            text-decoration: underline;
+            transform: translateX(-3px);
+        }
 
-main {
-    padding: 2rem 0;
-}
+        main {
+            padding: 2rem 0;
+        }
 
-form {
-    background-color: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
+        form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-form > div {
-    margin-bottom: 1.5rem;
-}
+        form > div {
+            margin-bottom: 1.5rem;
+        }
 
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--dark-color);
-}
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
 
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: var(--transition);
-}
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
 
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
-}
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+        }
 
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
 
-.button-group {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-}
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
 
-button, .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-}
+        button, .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
 
-button[type="submit"] {
-    background-color: var(--primary-color);
-    color: white;
-}
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+        }
 
-button[type="submit"]:hover {
-    background-color: #3a5a8a;
-    transform: translateY(-2px);
-}
+        button[type="submit"]:hover {
+            background-color: #3a5a8a;
+            transform: translateY(-2px);
+        }
 
-.cancel-btn {
-    background-color: #8ebafd;
-    color: var(--dark-color);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px;
-    border-radius: var(--border-radius);
-    font-weight: 500;
-    transition: var(--transition);
-}
+        .cancel-btn {
+            background-color: #8ebafd;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-.cancel-btn:hover {
-    background-color: #39d7ff;
-    transform: translateY(-2px);
-    text-decoration: none;
-    color: var(--dark-color);
-}
+        .cancel-btn:hover {
+            background-color: #39d7ff;
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: var(--dark-color);
+        }
 
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            form {
+                padding: 1.5rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button[type="submit"], .cancel-btn {
+                width: 100%;
+            }
+        }
 
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    form {
-        padding: 1.5rem;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-    
-    button[type="submit"], .cancel-btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    h1 {
-        font-size: 1.3rem;
-    }
-    
-    form {
-        padding: 1rem;
-    }
-}
-</style>
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            form {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -228,7 +227,7 @@ button[type="submit"]:hover {
             <button type="submit">Salvar Atividade</button>
         </form>
         <br>
-        <a href="{{ url_for('materia_detalhes_professor', materia_id=materia.id) }}" class="cancel-btn">Cancelar</a></a>
+        <a href="{{ url_for('materia_detalhes_professor', materia_id=materia.id) }}" class="cancel-btn">Cancelar</a>
     </main>
 </body>
 </html>

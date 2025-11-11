@@ -82,7 +82,6 @@ Siga os passos abaixo para rodar o SIGMA em sua máquina.
     ```bash
     pip install Flask Flask-SQLAlchemy Werkzeug
     ```
-    *(**Nota:** Em um projeto real, você criaria um `requirements.txt` com `pip freeze > requirements.txt`)*
 
 ### 3. Execução
 1.  Execute o arquivo `app.py`:

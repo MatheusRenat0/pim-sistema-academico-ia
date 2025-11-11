@@ -95,7 +95,7 @@ Siga os passos abaixo para rodar o SIGMA em sua máquina.
 
 ## Dados de Teste
 
-Para facilitar os testes, utilize as credenciais abaixo (conforme definido em `index.html` e no script de popularização do banco de dados):
+Para facilitar os testes, utilize as credenciais abaixo:
 
 | Perfil | Usuário | Senha | Método de Login |
 | :--- | :--- | :--- | :--- |

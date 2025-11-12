@@ -52,7 +52,7 @@ O sistema é dividido em três perfis de usuário principais, cada um com seu pr
 * **Backend:** **Flask**
 * **Banco de Dados:** **SQLite** (gerenciado via **Flask-SQLAlchemy**)
 * **Autenticação:** Gerenciamento de sessão do Flask e senhas com hash (via **Werkzeug**)
-* **Frontend:** HTML, CSS e JavaScript (conforme `index.html`)
+* **Frontend:** HTML, CSS e JavaScript
 
 ## Como Executar o Projeto Localmente
 
